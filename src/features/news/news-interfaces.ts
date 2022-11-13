@@ -1,4 +1,4 @@
-export interface NewsItem {
+export interface ReponseItem {
   category: string
   datetime: number
   headline: string
@@ -10,7 +10,10 @@ export interface NewsItem {
   url: string
 }
 
+export interface NewsItem extends ReponseItem {
+  isBookmarked: boolean
+}
+
 export interface NewsState {
   allNews: NewsItem[]
-  bookmarkedIds: number[]
 }

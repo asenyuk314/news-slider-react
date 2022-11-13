@@ -1,65 +1,54 @@
 import React, { memo, useEffect, useState } from 'react'
-import cn from 'classnames'
 
 import { useAppDispatch, useAppSelector } from 'src/app/hooks'
-import { Card, Pagination } from './components'
+import { Card, Pagination, StyledInput, Tabs, useInput } from './components'
 import { requestNews } from './news-actions'
 import { NEWS_PER_PAGE } from './news-constants'
-import { NewsItem } from './news-interfaces'
-import { getBookmarkedNews, getFirstNews, getNewsForTable } from './news-selectors'
+import { getFirstNews, getNewsForTable } from './news-selectors'
 import styles from './news.module.scss'
 
 export const News = memo(() => {
-  const [shownNews, setShownNews] = useState<NewsItem[]>([])
-  const [choosenNews, setChoosenNews] = useState<NewsItem[]>([])
-  const [currentTab, setCurrentTab] = useState<'news' | 'bookmarks'>('news')
+  const [currentTab, setCurrentTab] = useState('News')
+  const [currentPage, setCurrentPage] = useState(1)
+  const search = useInput()
   const dispatch = useAppDispatch()
   const allNews = useAppSelector(getNewsForTable)
   const firstNews = useAppSelector(getFirstNews)
-  const bookmarkedNews = useAppSelector(getBookmarkedNews)
-  console.log({bookmarkedNews, choosenNews, shownNews})
 
   useEffect(() => {
     dispatch(requestNews())
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setChoosenNews(allNews)
-  }, [allNews])
+    setCurrentPage(1)
+  }, [currentTab])
+
+  const shownNews = currentTab === 'News'
+    ? allNews.filter(item =>
+        item.headline.toLowerCase().includes(search.value.toLowerCase())
+        || item.summary.toLowerCase().includes(search.value.toLowerCase())
+      )
+    : allNews.filter(item => item.isBookmarked && (
+        item.headline.toLowerCase().includes(search.value.toLowerCase())
+        || item.summary.toLowerCase().includes(search.value.toLowerCase())
+    ))
 
   useEffect(() => {
-    onPaginateHandler(1)
-  }, [choosenNews]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  const onPaginateHandler = (pageNumber: number) => {
-    setShownNews(choosenNews.slice((pageNumber - 1) * NEWS_PER_PAGE, pageNumber * NEWS_PER_PAGE))
-  }
-
-  const onNewsTabClickHandler = () => {
-    setCurrentTab('news')
-    setChoosenNews(allNews)
-  }
-
-  const onBookmarksClickHandler = () => {
-    setCurrentTab('bookmarks')
-    setChoosenNews(bookmarkedNews)
-  }
+    if (currentPage > 1 && (currentPage - 1) * NEWS_PER_PAGE >= shownNews.length) {
+      const nextPage = Math.max(Math.ceil(shownNews.length / NEWS_PER_PAGE), 1)
+      setCurrentPage(nextPage)
+    }
+  }, [shownNews.length]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={styles.News}>
       <div className={styles.Header}>
-        <button
-          className={cn(styles.TabButton, { [styles.Active]: currentTab === 'news' })}
-          onClick={onNewsTabClickHandler}
-        >
-          News
-        </button>
-        <button
-          className={cn(styles.TabButton, { [styles.Active]: currentTab === 'bookmarks' })}
-          onClick={onBookmarksClickHandler}
-        >
-          Bookmarks
-        </button>
+        <Tabs
+          currentTab={currentTab}
+          setCurrentTab={setCurrentTab}
+          tabsArray={['News', 'Bookmarks']}
+        />
+        <StyledInput {...search} placeholder='Search' />
       </div>
       <div className={styles.Body}>
         {firstNews && (
@@ -69,14 +58,15 @@ export const News = memo(() => {
         )}
         <div>
           <div className={styles.CardsContainer}>
-            {shownNews.map(item => (
+            {shownNews.slice((currentPage - 1) * NEWS_PER_PAGE, currentPage * NEWS_PER_PAGE).map(item => (
               <Card key={item.id} {...item} />
             ))}
           </div>
           <Pagination
             itemsPerPage={NEWS_PER_PAGE}
-            totalItems={choosenNews.length}
-            onPaginate={onPaginateHandler}
+            totalItems={shownNews.length}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
           />
         </div>
       </div>

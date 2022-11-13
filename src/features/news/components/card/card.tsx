@@ -1,8 +1,7 @@
 import React, { memo } from 'react'
 
-import { useAppDispatch, useAppSelector } from 'src/app/hooks'
+import { useAppDispatch } from 'src/app/hooks'
 import { toggleBookmark } from 'src/features/news/news-slice'
-import { getBookmarkedIds } from 'src/features/news/news-selectors'
 import { Icon } from '../icon'
 import { CardProps } from './card-interfaces'
 import { dateParser } from './card-utils'
@@ -13,6 +12,7 @@ export const Card = memo(({
   headline,
   id,
   image,
+  isBookmarked,
   isPinned,
   related,
   source,
@@ -20,8 +20,6 @@ export const Card = memo(({
   url
 }: CardProps) => {
   const dispatch = useAppDispatch()
-  const bookmarkedIds = useAppSelector(getBookmarkedIds)
-  const isBookmarked = bookmarkedIds.includes(id)
   const date = dateParser(datetime)
 
   const onBookmarkClickHandler = () => {

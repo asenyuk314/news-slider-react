@@ -1,0 +1,25 @@
+@import 'src/styles/colors.scss';
+
+.StyledInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .Input {
+    outline: none;
+    background-color: #191818;
+    color: $TEXT_COLOR;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 30px;
+    font-size: 12px;
+    line-height: 14px;
+    width: 162px;
+    box-sizing: border-box;
+  }
+
+  .Icon {
+    position: absolute;
+    left: 9px;
+  }
+}

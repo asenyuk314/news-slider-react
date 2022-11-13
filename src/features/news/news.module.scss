@@ -6,23 +6,9 @@
 
   .Header {
     margin: 25px 0;
-    .TabButton {
-      padding: 0;
-      background: none;
-      color: $TEXT_COLOR;
-      opacity: 0.5;
-      font-size: 28px;
-      line-height: 32px;
-      font-weight: bold;
-
-      &:not(:last-child) {
-        margin-right: 20px;
-      }
-
-      &.Active {
-        opacity: 1;
-      }
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .Body {

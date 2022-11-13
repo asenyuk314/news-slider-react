@@ -4,7 +4,6 @@ import { NewsItem, NewsState } from './news-interfaces'
 
 const INITIAL_STATE: NewsState = {
   allNews: [],
-  bookmarkedIds: []
 }
 
 const newsSlice = createSlice({
@@ -15,11 +14,8 @@ const newsSlice = createSlice({
       state.allNews = payload
     },
     toggleBookmark: (state, { payload }: PayloadAction<number>) => {
-      if (state.bookmarkedIds.includes(payload)) {
-        state.bookmarkedIds = state.bookmarkedIds.filter(item => item !== payload)
-      } else {
-        state.bookmarkedIds.push(payload)
-      }
+      const item = state.allNews.find(item => item.id === payload)!
+      item.isBookmarked = !item.isBookmarked
     }
   }
 })

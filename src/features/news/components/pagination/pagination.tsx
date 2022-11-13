@@ -1,32 +1,31 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo } from 'react'
 
 import { PaginationProps } from './pagination-interfaces'
 import styles from './pagination.module.scss'
 
 export const Pagination = memo(({
+  currentPage,
   itemsPerPage,
-  onPaginate,
+  setCurrentPage,
   totalItems
 }: PaginationProps) => {
-  const [currentPage, setCurrentPage] = useState(1)
 
   const onNextBtnClickHandler = () => {
-    setCurrentPage(val => val + 1)
+    setCurrentPage((val: number) => val + 1)
   }
 
   const onPrevBtnClickHandler = () => {
-    setCurrentPage(val => val - 1)
+    setCurrentPage((val: number) => val - 1)
   }
 
-  useEffect(() => {
-    onPaginate(currentPage)
-  }, [currentPage]) // eslint-disable-line react-hooks/exhaustive-deps
+  const firstItemNumber = Math.min((currentPage - 1) * itemsPerPage + 1, totalItems)
+  const lastItemNumber = Math.min(currentPage * itemsPerPage, totalItems)
 
   return (
     <div className={styles.Pagination}>
       <div>
         <span>
-          {`${(currentPage - 1) * itemsPerPage + 1}-${Math.min(currentPage * itemsPerPage, totalItems)} `}
+          {`${firstItemNumber}-${lastItemNumber} `}
         </span>
         <span className={styles.TotalItemsSign}>
           {`out of ${totalItems}`}
@@ -43,7 +42,7 @@ export const Pagination = memo(({
         <button
           className={styles.Button}
           onClick={onNextBtnClickHandler}
-          disabled={currentPage === Math.ceil(totalItems / itemsPerPage)}
+          disabled={currentPage >= Math.ceil(totalItems / itemsPerPage)}
         >
           NEXT
         </button>

@@ -1,0 +1,22 @@
+@import 'src/styles/colors.scss';
+
+.Tabs {
+  .TabButton {
+    padding: 0;
+    background: none;
+    color: $TEXT_COLOR;
+    opacity: 0.5;
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: bold;
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    &:disabled {
+      opacity: 1;
+      cursor:  default;
+    }
+  }
+}

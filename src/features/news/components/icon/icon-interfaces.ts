@@ -1,3 +1,4 @@
 export interface IconProps {
-  name: 'bookmark' | 'bookmark-filled'
+  className?: string
+  name: 'bookmark' | 'bookmark-filled' | 'search'
 }
