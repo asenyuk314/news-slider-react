@@ -1,4 +1,4 @@
-export interface ReponseItem {
+export interface ResponseItem {
   category: string
   datetime: number
   headline: string
@@ -10,7 +10,7 @@ export interface ReponseItem {
   url: string
 }
 
-export interface NewsItem extends ReponseItem {
+export interface NewsItem extends ResponseItem {
   isBookmarked: boolean
 }
 
