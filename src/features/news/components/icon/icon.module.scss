@@ -1,0 +1,13 @@
+@import 'src/styles/colors.scss';
+
+.Icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill: $TEXT_COLOR;
+
+  & > svg {
+    height: 12px;
+    width: 12px;
+  }
+}

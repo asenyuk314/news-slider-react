@@ -1,0 +1,32 @@
+@import 'src/styles/colors.scss';
+@import 'src/styles/dimensions.scss';
+
+.Pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0;
+
+  .TotalItemsSign {
+    opacity: 0.25;
+  }
+
+  .Button {
+    color: $TEXT_COLOR;
+    background-color: #3C3C3C;
+    border-radius: 60px;
+    padding: 7px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 11px;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    &:disabled {
+      opacity: 0.25;
+    }
+  }
+}

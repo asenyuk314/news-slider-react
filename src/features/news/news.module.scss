@@ -1,0 +1,44 @@
+@import 'src/styles/colors.scss';
+@import 'src/styles/dimensions.scss';
+
+.News {
+  margin: 40px 30px;
+
+  .Header {
+    margin: 25px 0;
+    .TabButton {
+      padding: 0;
+      background: none;
+      color: $TEXT_COLOR;
+      opacity: 0.5;
+      font-size: 28px;
+      line-height: 32px;
+      font-weight: bold;
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      &.Active {
+        opacity: 1;
+      }
+    }
+  }
+
+  .Body {
+    display: flex;
+    justify-content: space-between;
+
+    .FirstCardContainer {
+      width: 478px;
+      height: 628px;
+    }
+
+    .CardsContainer {
+      display: grid;
+      grid-template-columns: repeat(3, $CARD_WIDTH);
+      grid-template-rows: repeat(2, $CARD_HEIGHT);
+      gap: 18px;
+    }
+  }
+}
