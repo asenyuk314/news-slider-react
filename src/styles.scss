@@ -1,0 +1,28 @@
+@import './styles/colors.scss';
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(./styles/fonts/Ubuntu/Ubuntu-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(./styles/fonts/Ubuntu/Ubuntu-Bold.ttf);
+  font-weight: bold;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: #242525;
+  color: $WHITE_COLOR;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}

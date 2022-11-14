@@ -56,19 +56,19 @@ export const News = memo(() => {
             <Card {...firstNews} isPinned />
           </div>
         )}
-        <div>
-          <div className={styles.CardsContainer}>
-            {shownNews.slice((currentPage - 1) * NEWS_PER_PAGE, currentPage * NEWS_PER_PAGE).map(item => (
-              <Card key={item.id} {...item} />
-            ))}
-          </div>
-          <Pagination
-            itemsPerPage={NEWS_PER_PAGE}
-            totalItems={shownNews.length}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+        <div className={styles.CardsContainer}>
+          {shownNews.slice((currentPage - 1) * NEWS_PER_PAGE, currentPage * NEWS_PER_PAGE).map(item => (
+            <Card key={item.id} {...item} />
+          ))}
         </div>
+      </div>
+      <div className={styles.Footer}>
+        <Pagination
+          itemsPerPage={NEWS_PER_PAGE}
+          totalItems={shownNews.length}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   )

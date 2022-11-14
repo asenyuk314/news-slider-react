@@ -1,10 +1,11 @@
 @import 'src/styles/colors.scss';
+@import 'src/styles/dimensions.scss';
 
 .Tabs {
   .TabButton {
     padding: 0;
     background: none;
-    color: $TEXT_COLOR;
+    color: $WHITE_COLOR;
     opacity: 0.5;
     font-size: 28px;
     line-height: 32px;
@@ -17,6 +18,14 @@
     &:disabled {
       opacity: 1;
       cursor:  default;
+    }
+  }
+}
+
+@media (max-width: $SMALL_SCREEN_WIDTH) {
+  .Tabs {
+    .TabButton {
+      font-size: 14px;
     }
   }
 }

@@ -4,7 +4,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 24px 0;
   width: 260px;
   border: 3px solid #3D3D3D;
   border-radius: 30px;
@@ -23,11 +22,13 @@
 
     .Select {
       margin: 0 10px;
-      background-color: #191818;
-      color: $TEXT_COLOR;
+      background-color: $DARK_GREY_COLOR;
+      color: $WHITE_COLOR;
       border: none;
       padding: 8px 0 8px 8px;
       border-radius: 5px;
+      font-size: 12px;
+      line-height: 14px;
     }
   }
 
@@ -41,7 +42,7 @@
       width: 18px;
       border-radius: 50%;
       background: none;
-      color: $TEXT_COLOR;
+      color: $WHITE_COLOR;
       opacity: 0.5;
       display: flex;
       justify-content: center;
@@ -51,8 +52,8 @@
       line-height: 11px;
   
       &:disabled {
-        background-color: #D6D6D6;
-        color: #000000;
+        background-color: $LIGHT_GREY_COLOR;
+        color: $BLACK_COLOR;
         opacity: 1;
       }
     }
@@ -71,8 +72,8 @@
       border: none;
   
       .ArrowIcon {
-        fill: #D6D6D6;
-        stroke: #000000;
+        fill: $LIGHT_GREY_COLOR;
+        stroke: $BLACK_COLOR;
         & > svg {
           height: 18px;
           width: 18px;
