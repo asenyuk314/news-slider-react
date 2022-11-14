@@ -1,32 +1,91 @@
 @import 'src/styles/colors.scss';
-@import 'src/styles/dimensions.scss';
 
 .Pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 24px 0;
+  width: 260px;
+  border: 3px solid #3D3D3D;
+  border-radius: 30px;
+  padding: 30px;
 
-  .TotalItemsSign {
-    opacity: 0.25;
-  }
+  .SelectorContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  .Button {
-    color: $TEXT_COLOR;
-    background-color: #3C3C3C;
-    border-radius: 60px;
-    padding: 7px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 10px;
-    line-height: 11px;
-
-    &:not(:last-child) {
-      margin-right: 10px;
+    .SelectSign {
+      font-size: 12px;
+      line-height: 14px;
+      opacity: 0.25;
     }
 
-    &:disabled {
-      opacity: 0.25;
+    .Select {
+      margin: 0 10px;
+      background-color: #191818;
+      color: $TEXT_COLOR;
+      border: none;
+      padding: 8px 0 8px 8px;
+      border-radius: 5px;
+    }
+  }
+
+  .DotsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .DotButton {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: none;
+      color: $TEXT_COLOR;
+      opacity: 0.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 10px;
+      line-height: 11px;
+  
+      &:disabled {
+        background-color: #D6D6D6;
+        color: #000000;
+        opacity: 1;
+      }
+    }
+  }
+
+  .ArrowButtonsContainer {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);;
+    padding-left: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .ArrowButton {
+      padding: 0;
+      background: none;
+      border: none;
+  
+      .ArrowIcon {
+        fill: #D6D6D6;
+        stroke: #000000;
+        & > svg {
+          height: 18px;
+          width: 18px;
+        }
+      }
+  
+      &:disabled {
+        opacity: 0.25;
+      }
+  
+      &:first-child {
+        margin-right: 5px;
+      }
     }
   }
 }
